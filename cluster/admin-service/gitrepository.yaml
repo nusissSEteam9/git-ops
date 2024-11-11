@@ -1,0 +1,13 @@
+# admin-service/gitrepository.yaml
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: admin-service
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  url: git@github.com:nusissSEteam9/Admin_Service_Team9.git
+  ref:
+    branch: master
+  secretRef:
+    name: flux-git-auth
