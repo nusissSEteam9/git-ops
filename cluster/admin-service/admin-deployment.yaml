@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: admin
-        image: 381492195384.dkr.ecr.ap-southeast-1.amazonaws.com/health/gateway:latest-AdminService  # 指定服务的镜像
+        image: 381492195384.dkr.ecr.ap-southeast-1.amazonaws.com/health/gateway:latest-AdminService  
         ports:
         - containerPort: 8086
         env:

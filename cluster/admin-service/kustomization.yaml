@@ -1,14 +1,13 @@
-# microservice1/kustomization.yaml
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: admin-service
+  name: admin-service-kustomization
   namespace: flux-system
 spec:
-  interval: 5m0s
-  path: "./deploy" # Git 仓库中 Kubernetes 配置文件的路径
+  interval: 5m0s  # Frequency of synchronization
+  path: "./cluster/admin-service"  # Path to the folder containing the resources
   prune: true
   sourceRef:
     kind: GitRepository
-    name: admin-service
-  targetNamespace: microservice1-namespace # 微服务的命名空间
+    name: gitops-repo  # The name of your GitRepository resource, pointing to the GitOps repo
+  targetNamespace: default  # Namespace where the resources will be deployed
