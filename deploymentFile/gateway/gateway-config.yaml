@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-config
+data:
+  TZ: Asia/Singapore
+  SERVER_PORT: "8080"
+  SPRING_APPLICATION_NAME: Gateway_Application_Team9
+  CORS_ALLOWED_ORIGINS: https://main.d3nl708liyb6t1.amplifyapp.com/
+  AUTH_SERVICE_URL: http://auth-service:80/auth
+  USER_SERVICE_URL: http://user-service:80/user
+  ADMIN_SERVICE_URL: http://admin-service:80/admin
+  RECIPE_SERVICE_URL: http://recipe-service:80/recipe
+  EMAIL_SERVICE_URL: http://email-service:80/email
+  REPORT_SERVICE_URL: http://report-service:80/report
+  REVIEW_SERVICE_URL: http://report-service:80/review

@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::381492195384:role/Qing
+      username: system:node:{{EC2PrivateDNSName}}
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2024-10-24T06:23:07Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "420414"
+  uid: 42817c3b-eaf6-44fc-b1d9-0c4872bd6bf6

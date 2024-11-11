@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin
+  template:
+    metadata:
+      labels:
+        app: admin
+    spec:
+      containers:
+      - name: admin
+        image: 381492195384.dkr.ecr.ap-southeast-1.amazonaws.com/health/gateway:latest-AdminService  # 指定服务的镜像
+        ports:
+        - containerPort: 8086
+        env:
+        # 引用 gateway-config ConfigMap 中的变量
+        - name: SPRING_APPLICATION_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config   # 引用同一个 ConfigMap
+              key: SPRING_APPLICATION_NAME
+        - name: USER_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: USER_SERVICE_URL
+        - name: RECIPE_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: RECIPE_SERVICE_URL
+        - name: EMAIL_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: EMAIL_SERVICE_URL
+        - name: REPORT_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: REPORT_SERVICE_URL
+        - name: REVIEW_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: REVIEW_SERVICE_URL
+        # 引用 gateway-secret Secret 中的变量
+        - name: JWT_SECRET
+          valueFrom:
+              secretKeyRef:
+                name: gateway-secret
+                key: JWT_SECRET
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+              secretKeyRef:
+                name: gateway-secret
+                key: SPRING_DATASOURCE_URL
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+              secretKeyRef:
+                name: gateway-secret
+                key: SPRING_DATASOURCE_USERNAME
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+              secretKeyRef:
+                name: gateway-secret
+                key: SPRING_DATASOURCE_PASSWORD
+        # 配置资源限制
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"

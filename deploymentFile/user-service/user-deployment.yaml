@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+      - name: user
+        image: 381492195384.dkr.ecr.ap-southeast-1.amazonaws.com/health/gateway:latest-UserService  # 指定 user 服务的镜像
+        ports:
+        - containerPort: 8080
+        env:
+        # 引用 gateway-config ConfigMap 中的变量
+        - name: AUTH_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: AUTH_SERVICE_URL
+        - name: ADMIN_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: ADMIN_SERVICE_URL
+        - name: RECIPE_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: RECIPE_SERVICE_URL
+        - name: EMAIL_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: EMAIL_SERVICE_URL
+        - name: REPORT_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: REPORT_SERVICE_URL
+        - name: REVIEW_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: REVIEW_SERVICE_URL
+        - name: SPRING_APPLICATION_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: SPRING_APPLICATION_NAME
+        - name: RECIPE_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: RECIPE_SERVICE_URL
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: SERVER_PORT
+        # 引用 gateway-secret Secret 中的变量
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: gateway-secret
+              key: JWT_SECRET
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            secretKeyRef:
+              name: gateway-secret
+              key: SPRING_DATASOURCE_URL
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: gateway-secret
+              key: SPRING_DATASOURCE_USERNAME
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: gateway-secret
+              key: SPRING_DATASOURCE_PASSWORD
+        # 配置资源限制
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
