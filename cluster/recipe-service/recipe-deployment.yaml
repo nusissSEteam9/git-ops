@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: recipe
-        image: 381492195384.dkr.ecr.ap-southeast-1.amazonaws.com/health/gateway:latest-RecipeService  # 指定服务的镜像
+        image: 381492195384.dkr.ecr.ap-southeast-1.amazonaws.com/health/gateway:recipe-808c4add64c0aa77de685baf33969de6df1496e4
         ports:
         - containerPort: 8081
         env:
