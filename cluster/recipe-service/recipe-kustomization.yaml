@@ -1,0 +1,17 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: recipe-kustomization
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: "./cluster/recipe-service"  # Path to the folder containing recipe-deployment.yaml
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: gitops-repo
+  targetNamespace: default  # Namespace for the deployment
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: recipe  # Ensure it matches the metadata.name in recipe-deployment.yaml
