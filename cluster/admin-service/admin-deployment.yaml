@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: admin
-        image: 381492195384.dkr.ecr.ap-southeast-1.amazonaws.com/health/gateway:latest-AdminService  
+        image: 381492195384.dkr.ecr.ap-southeast-1.amazonaws.com/health/gateway:admin-e7ea2a1013577c6a0b4f8fb7e4fbfcffc7347602
         ports:
         - containerPort: 8086
         env:
