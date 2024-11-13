@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: recipe
-        image: 381492195384.dkr.ecr.ap-southeast-1.amazonaws.com/health/gateway:recipe-2de7b3b5cd3898169435488e8fbc4361b1d616c2
+        image: 381492195384.dkr.ecr.ap-southeast-1.amazonaws.com/health/gateway:recipe-68d6136c7c79d7b13d90eaf6cfe7ff6a9a889261
         ports:
         - containerPort: 8081
         env:
